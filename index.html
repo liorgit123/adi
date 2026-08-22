@@ -25,6 +25,7 @@
       background: #fff;
     }
 
+    /* מסכים עם פייד */
     .screen {
       width: 100%;
       height: 100%;
@@ -39,21 +40,28 @@
       opacity: 1;
     }
 
+    /* תמונות: תופסות את כל האורך או הרוחב בלי לשנות יחס */
     .img-full {
       width: 100%;
       height: 100%;
-      object-fit: contain;
-      cursor: pointer;
+      object-fit: contain; /* שומר יחס */
+      background-color: #fff; /* שלא יהיה שחור מסביב */
+      touch-action: none; /* מניעת תפריט לחיצה ארוכה */
+      -webkit-touch-callout: none; /* מניעת תפריט iOS */
+      -webkit-user-select: none;
+      user-select: none;
     }
   </style>
 </head>
 <body>
 
   <div class="phone">
+    <!-- מסך 1 -->
     <div id="screen1" class="screen show">
       <img src="IMG_5012.png" class="img-full" id="touchArea">
     </div>
 
+    <!-- מסך 2 -->
     <div id="screen2" class="screen">
       <img src="IMG_5010.png" class="img-full">
     </div>
@@ -74,9 +82,11 @@
       screen1.classList.add('show');
     }
 
+    /* עכבר */
     touchArea.addEventListener('mousedown', showSecret);
     document.addEventListener('mouseup', hideSecret);
 
+    /* מסך מגע */
     touchArea.addEventListener('touchstart', function (e) {
       e.preventDefault();
       showSecret();
@@ -85,6 +95,11 @@
     document.addEventListener('touchend', function (e) {
       e.preventDefault();
       hideSecret();
+    });
+
+    /* מניעת תפריט לחיצה ארוכה */
+    document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
     });
   </script>
 
