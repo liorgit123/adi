@@ -6,51 +6,34 @@
   <style>
     body {
       margin: 0;
-      height: 100vh;
+      background: #eeeeff;
       display: flex;
       justify-content: center;
       align-items: center;
-      background: #eeeeff;
-      font-family: Arial, sans-serif;
-    }
-
-    .phone {
-      width: 100vw;
       height: 100vh;
-      max-width: 400px;
-      max-height: 800px;
-      border-radius: 30px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      font-family: Arial, sans-serif;
       overflow: hidden;
-      position: relative;
-      background: #000;
     }
 
+    /* מסכים מוצגים אחד על השני */
     .screen {
-      width: 100%;
-      height: 100%;
       position: absolute;
       top: 0;
       left: 0;
       opacity: 0;
     }
 
-    #screen1.show {
+    .screen.show {
       opacity: 1;
     }
 
-    #screen2 {
-      transition: opacity 0.25s ease;
-    }
-
-    #screen2.show {
-      opacity: 1;
-    }
-
-    .img-full {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    /* מציג את התמונה בדיוק כמו שהיא */
+    img {
+      display: block;
+      width: auto;
+      height: auto;
+      max-width: 100vw;
+      max-height: 100vh;
       touch-action: none;
       -webkit-touch-callout: none;
       -webkit-user-select: none;
@@ -60,14 +43,14 @@
 </head>
 <body>
 
-  <div class="phone">
-    <div id="screen1" class="screen show">
-      <img src="IMG_5012.jpeg" class="img-full" id="touchArea">
-    </div>
+  <!-- מסך 1 -->
+  <div id="screen1" class="screen show">
+    <img src="IMG_5012.jpeg" id="touchArea">
+  </div>
 
-    <div id="screen2" class="screen">
-      <img src="IMG_5010.jpeg" class="img-full">
-    </div>
+  <!-- מסך 2 -->
+  <div id="screen2" class="screen">
+    <img src="IMG_5010.jpeg">
   </div>
 
   <script>
@@ -85,9 +68,11 @@
       screen1.classList.add('show');
     }
 
+    /* עכבר */
     touchArea.addEventListener('mousedown', showSecret);
     document.addEventListener('mouseup', hideSecret);
 
+    /* מסך מגע */
     touchArea.addEventListener('touchstart', function (e) {
       e.preventDefault();
       showSecret();
@@ -98,6 +83,7 @@
       hideSecret();
     });
 
+    /* מניעת תפריט לחיצה ארוכה */
     document.addEventListener('contextmenu', function(e) {
       e.preventDefault();
     });
