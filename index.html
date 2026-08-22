@@ -15,19 +15,23 @@
       font-family: Arial, sans-serif;
     }
 
-    /* מסכים מוצגים אחד על השני */
     .screen {
       position: absolute;
       top: 0;
       left: 0;
-      display: none; /* הכי מהיר */
+      display: none;
     }
 
     .screen.show {
-      display: block; /* מיידי */
+      display: block;
+      animation: fadeIn 120ms ease-out; /* אפקט מעבר */
     }
 
-    /* מציג את התמונה בדיוק כמו שהיא */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.98); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
     img {
       display: block;
       width: auto;
@@ -43,12 +47,10 @@
 </head>
 <body>
 
-  <!-- מסך 1 -->
   <div id="screen1" class="screen show">
     <img src="IMG_5012.jpeg" id="touchArea">
   </div>
 
-  <!-- מסך 2 -->
   <div id="screen2" class="screen">
     <img src="IMG_5010.jpeg">
   </div>
@@ -68,11 +70,9 @@
       screen1.classList.add('show');
     }
 
-    /* עכבר */
     touchArea.addEventListener('mousedown', showSecret);
     document.addEventListener('mouseup', hideSecret);
 
-    /* מסך מגע */
     touchArea.addEventListener('touchstart', function (e) {
       e.preventDefault();
       showSecret();
@@ -83,7 +83,6 @@
       hideSecret();
     });
 
-    /* מניעת תפריט לחיצה ארוכה */
     document.addEventListener('contextmenu', function(e) {
       e.preventDefault();
     });
