@@ -22,10 +22,10 @@
       box-shadow: 0 0 20px rgba(0,0,0,0.2);
       overflow: hidden;
       position: relative;
-      background: #fff;
+      background: #000; /* כדי שלא יראו שוליים */
     }
 
-    /* מסכים עם פייד */
+    /* מסך בסיס */
     .screen {
       width: 100%;
       height: 100%;
@@ -33,21 +33,29 @@
       top: 0;
       left: 0;
       opacity: 0;
-      transition: opacity 0.4s ease;
     }
 
-    .screen.show {
+    /* מסך ראשון מוצג מיידית */
+    #screen1.show {
       opacity: 1;
     }
 
-    /* תמונות: תופסות את כל האורך או הרוחב בלי לשנות יחס */
+    /* מסך שני עם פייד */
+    #screen2 {
+      transition: opacity 0.3s ease;
+    }
+
+    #screen2.show {
+      opacity: 1;
+    }
+
+    /* תמונות */
     .img-full {
       width: 100%;
       height: 100%;
-      object-fit: contain; /* שומר יחס */
-      background-color: #fff; /* שלא יהיה שחור מסביב */
-      touch-action: none; /* מניעת תפריט לחיצה ארוכה */
-      -webkit-touch-callout: none; /* מניעת תפריט iOS */
+      object-fit: cover; /* ממלא את המסך בלי לשנות יחס */
+      touch-action: none;
+      -webkit-touch-callout: none;
       -webkit-user-select: none;
       user-select: none;
     }
@@ -58,12 +66,12 @@
   <div class="phone">
     <!-- מסך 1 -->
     <div id="screen1" class="screen show">
-      <img src="IMG_5012.png" class="img-full" id="touchArea">
+      <img src="IMG_5012.jpeg" class="img-full" id="touchArea">
     </div>
 
     <!-- מסך 2 -->
     <div id="screen2" class="screen">
-      <img src="IMG_5010.png" class="img-full">
+      <img src="IMG_5010.jpeg" class="img-full">
     </div>
   </div>
 
@@ -79,7 +87,7 @@
 
     function hideSecret() {
       screen2.classList.remove('show');
-      screen1.classList.add('show');
+      screen1.classList.add('show'); // חזרה מיידית
     }
 
     /* עכבר */
